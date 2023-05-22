@@ -18,7 +18,7 @@ class ProductController extends BaseController
     {
         $this->model = new ProductModel();
         $this->data['session'] = \Config\Services::session();
-        $this->data['page_title'] = "Obat";
+        $this->data['page_title'] = "Product";
     }
 
     public function index()
@@ -26,8 +26,8 @@ class ProductController extends BaseController
         //
         $this->data['page_title'] = "Product";
 
-        $this->data['products'] = $this->model->select('master_product.id as id, name_eskrim, harga, upload_foto, deskripsi')->orderBy('id', 'asc')->findAll();
-        return view('product/index', $this->data);
+        $this->data['products'] = $this->model->select('master_product.id as id, name_eskrim, harga,upload_foto, deskripsi')->orderBy('id', 'asc')->findAll();
+        return view('/dashboard', $this->data);
     }
 
     public function create()
@@ -102,10 +102,8 @@ class ProductController extends BaseController
     {
 
         $this->data['page_title'] = "Edit Product";
-        $this->data['menu'] = "obat";
         $this->data['product'] = $this->model->where('id', $id)->first();
-        $this->data['categories'] = $this->jenis->findAll();
-        return view('obat/update', $this->data);
+        return view('product/update', $this->data);
     }
 
     public function update()
@@ -114,41 +112,30 @@ class ProductController extends BaseController
         $existData = $this->model->where('id', $dataInput['id_product'])->first();
         // dd($dataInput);
         $filterData = [
-            "nama_barang" => esc($dataInput['nama_barang']),
-            "jenis_barang" => esc($dataInput["jenis_barang"]),
-            "kuantitas" => esc($dataInput['kuantitas']),
-            "harga_satuan" => esc($dataInput['harga_satuan']),
+            "name_eskrim" => esc($dataInput['name_eskrim']),
+            "harga" => esc($dataInput['harga']),
+            "deskripsi" => esc($dataInput['deskripsi']),
+
         ];
 
 
 
         $rulesSet = [
-            "nama_barang" => [
+            "name_eskrim" => [
                 "rules" => "required",
                 "errors" => [
                     "required" => "Harap isi nama produk terlebih dahulu",
                 ]
             ],
-            "jenis_barang" => [
-                "rules" => "required",
-                "errors" => [
-                    "required" => "Harap isi jenis barang terlebih dahulu"
-                ]
-            ],
-            "kuantitas" => [
-                "rules" => "required",
-                "errors" => [
-                    "required" => "Harap isi {field} terlebih dahulu"
-                ]
-            ],
-            "harga_satuan" => [
+
+            "harga" => [
                 "rules" => "required",
                 "errors" => [
                     "required" => "Harap isi harga satuan terlebih dahulu",
                 ]
             ],
             "foto_barang" => [
-                "rules" => "max_size[foto_barang,2048]|mime_in[foto_barang,image/png,image/jpg,image/jpeg]",
+                "rules" => "max_size[upload_foto,2048]|mime_in[upload_foto,image/png,image/jpg,image/jpeg]",
                 "errors" => [
                     "max_size" => "Ukuran maks. foto barang 2 MB",
                     "mime_in" => "Format foto barang hanya dalam bentuk png, jpg, dan jpeg",
@@ -156,9 +143,9 @@ class ProductController extends BaseController
             ],
         ];
 
-        if ($filterData['nama_barang'] != $existData['nama_barang']) {
-            $rulesSet['nama_barang']['rules'] = 'required|is_unique[master_barang.nama_barang]';
-            $rulesSet['nama_barang']['errors'] = [
+        if ($filterData['name_eskrim'] != $existData['name_eskrim']) {
+            $rulesSet['name_eskrim']['rules'] = 'required|is_unique[master_product.name_eskrim]';
+            $rulesSet['nama_eskrim']['errors'] = [
                 "required" => "Harap isi nama produk terlebih dahulu",
                 "is_unique" => "Nama produk sudah terdaftar",
             ];
@@ -168,26 +155,26 @@ class ProductController extends BaseController
 
         // dd($this->validate($rulesSet));
         if (!$this->validate($rulesSet)) {
-            return redirect()->to(base_url('/obat/update' . $dataInput['id_product']))->withInput();
+            return redirect()->to(base_url('/product/edit/' . $dataInput['id_product']))->withInput();
         }
 
-        $foto = $this->request->getFile('foto_barang');
+        $foto = $this->request->getFile('upload_foto');
         // dd($foto->getExtension());
         if ($foto->getError() != 4) {
             // Hapus foto yang sudah ada
-            unlink("img/uploads/" . $existData['foto_barang']);
+            unlink("img/uploads/" . $existData['upload_foto']);
 
             // Tambahkan foto yang baru
             $time = Time::now('America/Chicago', 'en_US');
-            $namaFile = $filterData['nama_barang'] . "_" . $time->timestamp . "." . $foto->getExtension();
+            $namaFile = $filterData['name_eskrim'] . "_" . $time->timestamp . "." . $foto->getExtension();
             $foto->move('img/uploads', $namaFile);
-            $filterData['foto_barang'] = $namaFile;
+            $filterData['upload_foto'] = $namaFile;
         }
 
         // Insert ke db
         $this->model->update($dataInput['id_product'], $filterData);
         session()->setFlashdata('update', 'Berhasil perbarui data');
-        return redirect()->to(base_url('/obat'));
+        return redirect()->to(base_url('/dashboard'));
     }
 
 

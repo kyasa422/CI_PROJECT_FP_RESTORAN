@@ -14,7 +14,7 @@ class UserController extends BaseController
     {
         $this->model = new ProductModel();
         $this->data['session'] = \Config\Services::session();
-        $this->data['page_title'] = "Obat";
+        $this->data['page_title'] = "product";
     }
     public function index()
     {
@@ -30,8 +30,7 @@ class UserController extends BaseController
     }
     public function dashboard()
     {
-        $this->data['products'] = $this->model->select('master_product.id as id, name_eskrim, harga, upload_foto, deskripsi')->orderBy('id', 'asc')->findAll();
+        $this->data['products'] = $this->model->select('master_product.id as id, name_eskrim, harga,upload_foto, deskripsi')->orderBy('id', 'asc')->findAll();
         return view('dashboard/index', $this->data);
-
     }
 }

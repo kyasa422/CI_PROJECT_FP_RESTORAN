@@ -41,8 +41,9 @@ $routes->get('/product/create', 'ProductController::create');
 $routes->get('/product/index', 'ProductController::index');
 $routes->post('/product/store', 'ProductController::store');
 $routes->get('/product/edit/(:segment)', 'ProductController::edit/$1');
-$routes->post('/product/update/(:segment)', 'ProductController::update/$1');
 $routes->post('/product/delete/(:segment)', 'ProductController::destroy/$1');
+$routes->post('/product/update', 'ProductController::update');
+
 
 
 /*

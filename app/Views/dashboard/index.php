@@ -52,43 +52,48 @@
 
 
 
-        <div> <!-- Start of cards -->
+        <div class=" py-4"> <!-- Start of cards -->
 
             <p class="font-bold mt-12 pb-2 border-b border-gray-200">Manajemen Es-Cream</p>
-            <a href="product/create" class="bg-blue-500   ">Tambah Produk</a>
+           
+            <a href="product/create" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"  ">Tambah Produk</a>
         </div>
+
+           
+
+
 
 
         <div class="border border-blue-500">
-            <table class="border border-blue-500 px-10">
-
+            <table class="min-w-full text-left text-sm font-light">
+                <thead class="border-b font-medium dark:border-neutral-500">
                 <tr>
-                    <th>#</th>
-                    <th class=" grid ">Nama EsCream</th>
-                    <th>Harga</th>
-                    <th>Foto EsCream</th>
-                    <th>Deskripsi</th>
-                    <th>Aksi</th>
+                    <th scope="col" class="px-6 py-4">#</th>
+                    <th scope="col" class="px-6 py-4">Nama EsCream</th>
+                    <th scope="col" class="px-6 py-4">Harga</th>
+                    <th scope="col" class="px-6 py-4">Foto EsCream</th>
+                    <th scope="col" class="px-6 py-4">Deskripsi</th>
+                    <th scope="col" class="px-6 py-4">Aksi</th>
                 </tr>
-
+                </thead>
                 <tbody>
                     <?php $no = 0; ?>
                     <?php if (count($products) > 0) : ?>
                         <?php foreach ($products as $product) : ?>
-                            <tr>
-                                <th scope="row"><?= ++$no; ?></th>
-                                <td><?= $product['name_eskrim']; ?></td>
-                                <td><?= $product['harga']; ?></td>
-                                <td><img src="img/uploads/<?= $product['upload_foto']; ?>" alt="" width="100"></td>
+                            <tr class="border-b dark:border-neutral-500">
+                                <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium"><?= ++$no; ?></th>
+                                <td class="whitespace-nowrap px-6 py-4"><?= $product['name_eskrim']; ?></td>
+                                <td class="whitespace-nowrap px-6 py-4" ><?= $product['harga']; ?></td>
+                                <td class="whitespace-nowrap px-6 py-4"><img src="img/uploads/<?= $product['upload_foto']; ?>" alt="" width="100"></td>
 
-                                <td><?= $product['deskripsi']; ?></td>
+                                <td class="whitespace-nowrap px-6 py-4"><?= $product['deskripsi']; ?></td>
 
-                                <td>
+                                <td class="flex">
                                     <form action="/product/delete/<?= $product['id']; ?>" method="post" id="deleteForm">
-                                        <button type="submit"> D </button>
+                                        <button type="submit" class="whitespace-nowrap px-3 py-16"> <img src="img/delete.png" alt="" srcset=""> </button>
                                     </form>
-                                    <!-- <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-info-circle"></i></button> -->
-                                    <a href="/obat/edit/<?= $product['id']; ?>"> E</a>
+                                    
+                                    <a href="/product/edit/<?= $product['id']; ?>" class="whitespace-nowrap px-3 py-16"> <img src="img/edit.png" alt="" srcset=""></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
