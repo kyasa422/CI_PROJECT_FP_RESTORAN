@@ -4,6 +4,7 @@ namespace Config;
 
 use CodeIgniter\Config\AutoloadConfig;
 
+
 /**
  * -------------------------------------------------------------------
  * AUTOLOADER CONFIGURATION
@@ -95,3 +96,5 @@ class Autoload extends AutoloadConfig
      */
     public $helpers = [];
 }
+
+

@@ -45,8 +45,7 @@
                                             Log in
                                         </button>
 
-                                        <!--Forgot password link-->
-                                        <a href="#!"></a>
+                                    
                                     </div>
 
                                     <!--Register button-->

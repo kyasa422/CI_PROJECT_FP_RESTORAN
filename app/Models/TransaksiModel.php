@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProductModel extends Model
+class TransaksiModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'master_product';
+    protected $table            = 'transaksi';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name_eskrim', 'harga', 'upload_foto', 'deskripsi'];
+    protected $allowedFields    = ['id_product', 'jumlah', 'buyer', 'id_user'];
 
     // Dates
     protected $useTimestamps = false;
@@ -42,8 +42,17 @@ class ProductModel extends Model
     public function getProduct($id = false)
     {
         if ($id == false) {
+            $this->select('transaksi.*,master_product.name_eskrim,master_product.harga,master_user.username');
+            $this->join('master_product', 'master_product.id = id_product');
+            $this->join('master_user', 'master_user.id = id_user');
+  
+
             return $this->findAll();
         }
+
         return $this->where(['id' => $id])->first();
     }
+
 }
+
+

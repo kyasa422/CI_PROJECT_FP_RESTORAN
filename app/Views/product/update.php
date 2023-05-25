@@ -49,7 +49,7 @@
       </div>
 
       <div class="button align-self-end">
-        <a href="/product" type="submit" class="btn btn-danger">Kembali</a>
+        <a href="/dashboard" type="submit" class="btn btn-danger">Kembali</a>
         <button type="submit" class="btn btn-primary">Ubah</button>
       </div>
     </form>

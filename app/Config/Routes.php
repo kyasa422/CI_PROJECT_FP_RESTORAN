@@ -43,6 +43,13 @@ $routes->post('/product/store', 'ProductController::store');
 $routes->get('/product/edit/(:segment)', 'ProductController::edit/$1');
 $routes->post('/product/delete/(:segment)', 'ProductController::destroy/$1');
 $routes->post('/product/update', 'ProductController::update');
+$routes->get('/product/(:segment)', 'ProductController::show/$1');
+$routes->get('login/', 'UserController::logout');
+$routes->get('/transaksi/(:segment)', 'UserController::create/$1');
+$routes->post('/transaksi/save', 'UserController::save');
+$routes->get('/transaksi/history_transaksi', 'TransaksiController::history');
+
+
 
 
 
