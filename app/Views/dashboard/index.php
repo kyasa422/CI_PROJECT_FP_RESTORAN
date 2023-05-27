@@ -102,11 +102,7 @@
 
 
 
-</div> <!-- most popular Card section end -->
 
-
-
-</div> <!-- end of cards -->
 </main>
 </div>
 

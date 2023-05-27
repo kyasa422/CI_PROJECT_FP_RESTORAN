@@ -66,10 +66,14 @@ if (strpos(current_url(), 'printpdf')){
         <thead class="border-b font-medium dark:border-neutral-500">
             <tr>
                 <th scope="col" class="px-6 py-4">No</th>
+                <th scope="col" class="px-6 py-4">kasir</th>
                 <th scope="col" class="px-6 py-4">Pembeli</th>
                 <th scope="col" class="px-6 py-4">Harga</th>
                 <th scope="col" class="px-6 py-4">Jumlah </th>              
                 <th scope="col" class="px-6 py-4">Total Harga</th>
+                <th scope="col" class="px-6 py-4">Aksi</th>
+
+       
                
 
             </tr>
@@ -80,6 +84,8 @@ if (strpos(current_url(), 'printpdf')){
                 <?php foreach ($transaksi as $transaksi) : ?>
                     <tr class="border-b dark:border-neutral-500">
                         <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium"><?= ++$no; ?></th>
+                        <td class="whitespace-nowrap pl-8 pr-6 py-4"><?= $transaksi['username']; ?></td>
+
                         <td class="whitespace-nowrap pl-8 pr-6 py-4"><?= $transaksi['buyer']; ?></td>
                         <td class="whitespace-nowrap px-6 py-4"><?= $transaksi['jumlah']; ?></td>
 
@@ -88,6 +94,8 @@ if (strpos(current_url(), 'printpdf')){
 
                         
                         <td class="whitespace-nowrap pl-8 pr-6 py-4"><?= $transaksi['jumlah'] * $transaksi['harga']; ?></td>
+                        <td class="whitespace-nowrap pl-8 pr-6 py-4"> <a href="/transaksi/delete/<?= $transaksi['id']; ?>"> hapus </a></td>
+                     
 
 
                     </tr>

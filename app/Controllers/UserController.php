@@ -107,6 +107,7 @@ class UserController extends BaseController
             'jumlah' => $jumlah_product,
             'buyer' => $pembeli,
             'id_user' =>  session()->get('user_id'),
+            'username' => session()->get('username'),
 
         ]);
 

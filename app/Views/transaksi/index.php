@@ -10,6 +10,7 @@
             <img src="/img/uploads/<?= $product['upload_foto']; ?>" alt="" >
             <hr>
             <h3 class="mb-2"><?= strtoupper($product['name_eskrim']); ?></h3>
+            
             <p><i><?= $product['deskripsi']; ?></i></p>
             <br>
 
@@ -48,6 +49,7 @@
                     </div>
                 </div>
 
+          
                 <a href="/dashboard/" class="btn btn-danger mr-3">Kembali</a>
                 <button type="submit" class="btn btn-success">Beli</button>
                 <br><br><br>

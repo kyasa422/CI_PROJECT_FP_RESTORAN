@@ -1,8 +1,15 @@
-<?= $this->extend('layout/header'); ?>
 
-<?= $this->section('content'); ?>
+
+
+
+    <?= $this->extend('layout/header'); ?>
+
+    <?= $this->section('content'); ?>
+
+<div class="border border-blue-500">
+
 <div class="row ms-2">
-  <h1 class="my-3">Form Tambah Produk</h1>
+  <h1>Form Tambah Es Cream</h1>
   <div class="col-lg-8 border border-2 rounded-3 p-3 shadow">
     <?php $error = session()->get('_ci_validation_errors'); ?>
     <form action="/product/store" method="post" enctype="multipart/form-data">

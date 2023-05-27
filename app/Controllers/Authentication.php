@@ -48,7 +48,7 @@ class Authentication extends BaseController
             if (password_verify($password, $user['password'])) {
                 session()->set([
                     'user_id' => $user['id'],
-                    
+                    'username' => $user['username'],
              
                     
                     'logged_in' => TRUE

@@ -32,7 +32,7 @@ class TransaksiController extends BaseController
     {
         //
  
-        $this->data['transaksi'] = $this->model->select('transaksi.id as id, jumlah, master_product.harga as harga, buyer')->join('master_product', 'master_product.id = transaksi.id_product')->orderBy('id', 'asc')->findAll();
+        $this->data['transaksi'] = $this->model->select('transaksi.id as id, jumlah, master_product.harga as harga, buyer,username')->join('master_product', 'master_product.id = transaksi.id_product', 'master_user.username = transaksi.username')->orderBy('id', 'asc')->findAll();
  
         return view('/transaksi/history', $this->data);
     }
@@ -45,5 +45,14 @@ class TransaksiController extends BaseController
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->render();
         $dompdf->stream();
+    }
+
+    public function destroy($id)
+    {
+        $product = $this->model->find($id);
+
+        $this->model->delete($id);
+        session()->setFlashdata('delete', 'Berhasil hapus data');
+        return redirect()->to(base_url('/transaksi/history'));
     }
 }

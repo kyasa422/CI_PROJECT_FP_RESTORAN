@@ -40,6 +40,7 @@ $routes->get('/product', 'ProductController::index');
 $routes->get('/product/create', 'ProductController::create');
 $routes->get('/product/index', 'ProductController::index');
 $routes->post('/product/store', 'ProductController::store');
+ 
 $routes->get('/product/edit/(:segment)', 'ProductController::edit/$1');
 $routes->post('/product/delete/(:segment)', 'ProductController::destroy/$1');
 $routes->post('/product/update', 'ProductController::update');
@@ -49,6 +50,7 @@ $routes->get('/transaksi/detail/(:segment)', 'UserController::create/$1');
 $routes->post('/transaksi/save', 'UserController::save');
 $routes->get('/transaksi/history', 'TransaksiController::history');
 $routes->get('/transaksi/printpdf', 'TransaksiController::printpdf');
+$routes->get('/transaksi/delete/(:segment)', 'TransaksiController::destroy/$1');
 
 
 
