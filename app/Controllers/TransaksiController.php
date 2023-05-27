@@ -3,13 +3,13 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ProductModel;
+use \Dompdf\Dompdf;
 use App\Models\TransaksiModel;
 use CodeIgniter\I18n\Time;
 
 
 
-class ProductController extends BaseController
+class TransaksiController extends BaseController
 {
 
     protected $data;
@@ -20,20 +20,30 @@ class ProductController extends BaseController
 
     public function __construct()
     {
-        $this->model = new ProductModel();
+        $this->model = new TransaksiModel();
         $this->data['session'] = \Config\Services::session();
-        $this->data['page_title'] = "Product";
+        $this->data['page_title'] = "detail transaksi";
 
-        $this->TransaksiModel = new TransaksiModel();
+        
 
     }
 
     public function history()
     {
         //
-        $this->data['page_title'] = "Product";
-
-        $this->data['products'] = $this->model->select('transaksi.id as id, jumlah, buyer')->orderBy('id', 'asc')->findAll();
-        return view('/transaksi/history_transaksi', $this->data);
+ 
+        $this->data['transaksi'] = $this->model->select('transaksi.id as id, jumlah, master_product.harga as harga, buyer')->join('master_product', 'master_product.id = transaksi.id_product')->orderBy('id', 'asc')->findAll();
+ 
+        return view('/transaksi/history', $this->data);
+    }
+    public function printpdf(){
+        
+        $this->data['transaksi'] = $this->model->select('transaksi.id as id, jumlah, master_product.harga as harga, buyer')->join('master_product', 'master_product.id = transaksi.id_product')->orderBy('id', 'asc')->findAll();
+        $dompdf = new Dompdf();
+        $html = view('transaksi/history', $this->data);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream();
     }
 }

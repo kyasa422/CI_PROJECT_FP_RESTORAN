@@ -106,7 +106,7 @@ class UserController extends BaseController
             'id_product' => $id_product,
             'jumlah' => $jumlah_product,
             'buyer' => $pembeli,
-            'id_user' =>  $this->session->get('id_user')
+            'id_user' =>  session()->get('user_id'),
 
         ]);
 

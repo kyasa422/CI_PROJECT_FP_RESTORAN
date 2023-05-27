@@ -40,8 +40,11 @@
         <div class="invalid-feedback">
           <?= isset($error['deskripsi']) ? $error['deskripsi'] : ''; ?>
         </div>
-
-      <button type="submit" class="btn btn-primary">Tambah</button>
+        <div class=" my-3 "> 
+        <button type="submit" class="btn btn-primary ">Tambah</button>
+      <a href="/dashboard" class="btn btn-secondary ">Kembali</a>
+        </div>
+     
     </form>
   </div>
 </div>

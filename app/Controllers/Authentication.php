@@ -46,7 +46,13 @@ class Authentication extends BaseController
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
-                
+                session()->set([
+                    'user_id' => $user['id'],
+                    
+             
+                    
+                    'logged_in' => TRUE
+                ]);
                 return redirect()->to('/dashboard');
             } else {
                 return redirect()->to('/login');

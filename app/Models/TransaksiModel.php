@@ -13,7 +13,7 @@ class TransaksiModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_product', 'jumlah', 'buyer', 'id_user'];
+    protected $allowedFields    = ['id','id_product', 'jumlah', 'buyer', 'id_user'];
 
     // Dates
     protected $useTimestamps = false;
@@ -42,9 +42,10 @@ class TransaksiModel extends Model
     public function getProduct($id = false)
     {
         if ($id == false) {
-            $this->select('transaksi.*,master_product.name_eskrim,master_product.harga,master_user.username');
+            $this->select('transaksi.*,master_product.name_eskrim,master_product.harga as harga,master_user.username');
             $this->join('master_product', 'master_product.id = id_product');
             $this->join('master_user', 'master_user.id = id_user');
+          
   
 
             return $this->findAll();
