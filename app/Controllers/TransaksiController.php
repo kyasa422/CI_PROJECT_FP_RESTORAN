@@ -38,7 +38,7 @@ class TransaksiController extends BaseController
     }
     public function printpdf(){
         
-        $this->data['transaksi'] = $this->model->select('transaksi.id as id, jumlah, master_product.harga as harga, buyer')->join('master_product', 'master_product.id = transaksi.id_product')->orderBy('id', 'asc')->findAll();
+        $this->data['transaksi'] = $this->model->select('transaksi.id as id, jumlah, master_product.harga as harga, buyer,username')->join('master_product', 'master_product.id = transaksi.id_product','master_user.username = transaksi.username')->orderBy('id', 'asc')->findAll();
         $dompdf = new Dompdf();
         $html = view('transaksi/history', $this->data);
         $dompdf->loadHtml($html);

@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li class="py-1 border-r-4 border-white">
-                <a href="login" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded flex justify-center"> Log Out</a>
+                <a href="/login" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded flex justify-center"> Log Out</a>
               
             </ul>
         </nav>
@@ -50,7 +50,7 @@
 
            
 
-
+    
 
 
         <div class=" border border-blue-500">
@@ -98,7 +98,8 @@
                 </table>
         </div>
 
-
+<?php 
+dd(session()->get('username') ) ?>
 
 
 

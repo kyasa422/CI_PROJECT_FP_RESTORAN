@@ -16,12 +16,12 @@ class Authentication extends BaseController
     }
     public function index()
     {
-        
+
         return view('login/login');
     }
     public function register()
     {
-       
+
         $username = $this->request->getVar('username');
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
@@ -37,8 +37,8 @@ class Authentication extends BaseController
     }
 
     public function check()
-    {   
-        
+    {
+
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
 
@@ -49,8 +49,8 @@ class Authentication extends BaseController
                 session()->set([
                     'user_id' => $user['id'],
                     'username' => $user['username'],
-             
-                    
+
+
                     'logged_in' => TRUE
                 ]);
                 return redirect()->to('/dashboard');
